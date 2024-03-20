@@ -2,9 +2,7 @@ package gr.aueb.cf;
 
 
 
-import gr.aueb.cf.model.Meeting;
-import gr.aueb.cf.model.Student;
-import gr.aueb.cf.model.Teacher;
+import gr.aueb.cf.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -18,34 +16,30 @@ public class App {
 
         em.getTransaction().begin();
 
-        Teacher teacher1 = new Teacher();
-        teacher1.setFirstName("Bob");
-        teacher1.setLastName("Ross");
+        Speciality maths = new Speciality();
+        maths.setSpeciality("Mathematician");
 
-        Student student1 = new Student();
-        student1.setFirstName("Mike");
-        student1.setLastName("James");
+        Meeting meeting = new Meeting();
+        meeting.setMeetingRoom("Room 101");
+        meeting.setMeetingDate("2024-03-15");
 
-        Meeting meeting1 = new Meeting();
-        meeting1.setMeetingRoom("Room 102");
-        meeting1.setMeetingDate("2024-05-25");
+        Student student = new Student();
+        student.setFirstName("Alice");
+        student.setLastName("Smith");
+        student.setBirthDate("1990-01-01");
 
-        teacher1.addMeeting(meeting1);
-        student1.addMeeting(meeting1);
+        Teacher teacher = new Teacher();
+        teacher.setFirstName("John");
+        teacher.setLastName("Doe");
+        teacher.setSpeciality(maths);
 
-        System.out.println("Teacher's meetings: " + teacher1.getMeetings());
-        System.out.println("Student's meetings: " + student1.getMeetings());
+        meeting.setStudent(student);
+        meeting.setTeacher(teacher);
 
-
-        teacher1.removeMeeting(meeting1);
-        student1.removeMeeting(meeting1);
-
-        System.out.println("Teacher's meetings after removal: " + teacher1.getMeetings());
-        System.out.println("Student's meetings after removal: " + student1.getMeetings());
-
-        em.persist(teacher1);
-        em.persist(student1);
-        em.persist(meeting1);
+        em.persist(maths);
+        em.persist(meeting);
+        em.persist(student);
+        em.persist(teacher);
         em.getTransaction().commit();
 
         em.close();

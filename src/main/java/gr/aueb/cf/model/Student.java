@@ -57,7 +57,6 @@ public class Student extends AbstractEntity{
     }
 
 
-
     @Override
     public String toString() {
         return "Student{" +

@@ -30,6 +30,34 @@ public class Meeting extends AbstractEntity{
         @Column(name = "MEETING_DATE")
         private String meetingDate;
 
+        public void setStudent(Student student) {
+                this.student = student;
+                if (student != null) {
+                        student.getMeetings().add(this);
+                }
+        }
+
+        public void setTeacher(Teacher teacher) {
+                this.teacher = teacher;
+                if (teacher != null) {
+                        teacher.getMeetings().add(this);
+                }
+        }
+
+        public void removeStudent() {
+                if (student != null) {
+                        student.getMeetings().remove(this);
+                        student = null;
+                }
+        }
+
+        public void removeTeacher() {
+                if (teacher != null) {
+                        teacher.getMeetings().remove(this);
+                        teacher = null;
+                }
+        }
+
         @Override
         public String toString() {
                 return "Meeting{" +

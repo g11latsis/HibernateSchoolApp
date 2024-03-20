@@ -46,7 +46,6 @@ public class Teacher extends AbstractEntity{
         }
     }
 
-
     public void removeMeeting(Meeting meeting) {
         if (getMeetings().contains(meeting)) {
             getMeetings().remove(meeting);
